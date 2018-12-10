@@ -77,14 +77,14 @@ const viewDataMixin = {
             'payload',
             'auth',
             'concatenate',
-            "cancelWhen"
+            "cancelWhen",
+            'getDataWhen'
         ]),
         ...generateNonEvaluatedMagicProperties([
             'transformRequest',
             'transformResponse',
             "onSuccess",
             "onError",
-            'getDataWhen',
 
         ])
 
@@ -170,7 +170,7 @@ const viewDataMixin = {
                 _concatenate,
                 _getDataWhen
             } = this;
-            if (this.internal.busy || (!force && !_getDataWhen())) return;
+            if (this.internal.busy || (!force && !_getDataWhen)) return;
             this.cancelClient && this.cancelClient.cancel();
             const cancelClient = axios.CancelToken.source();
             this.cancelClient = cancelClient;
