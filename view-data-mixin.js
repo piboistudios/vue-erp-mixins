@@ -1,3 +1,4 @@
+
 import { propOrOther, consumePropOrOther, AxiosTransformer, generateMagicProperties, generateNonEvaluatedMagicProperties } from './utils/functions';
 const axios = require('axios').default;
 const defaultNothing = () => ({
@@ -27,7 +28,17 @@ const viewDataMixin = {
         },
         baseURL: Function,
         transformRequest: defaultTransformation(),
-        transformResponse: defaultTransformation(),
+        transformResponse: {
+            type: Function,
+            default: (data, headers) => {
+                const retVal =
+                    (headers["content-type"] &&
+                        headers["content-type"].toLowerCase().indexOf("json") > -1 &&
+                        JSON.parse(data)) ||
+                    data;
+                return retVal;
+            }
+        },
         headers: Object | Function,
         params: defaultNothing(),
         payload: defaultNothing(),
@@ -55,7 +66,7 @@ const viewDataMixin = {
         },
         cancelWhen: defaultNothing()
     },
-    computed: {
+    computed: Object.assign({
         ViewData() {
             const retVal = this.view.data;
             if (!retVal && this._lazy) this.GetViewData();
@@ -64,7 +75,8 @@ const viewDataMixin = {
         Busy() {
             return this.internal.busy;
         },
-        ...generateMagicProperties([
+    },
+        generateMagicProperties([
             'debounceTime',
             'lazy',
             'apiUrl',
@@ -80,15 +92,13 @@ const viewDataMixin = {
             "cancelWhen",
             'getDataWhen'
         ]),
-        ...generateNonEvaluatedMagicProperties([
+        generateNonEvaluatedMagicProperties([
             'transformRequest',
             'transformResponse',
             "onSuccess",
             "onError",
 
-        ])
-
-    },
+        ])),
     data,
     mounted() {
         this._$_init && this._$_init();

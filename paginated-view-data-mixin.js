@@ -14,7 +14,7 @@ export default {
             default: "pageSize",
         },
     },
-    computed: {
+    computed: Object.assign({
         Params() {
             const { _httpMethod } = this;
             if (_httpMethod.toLowerCase() !== "get") return {};
@@ -45,9 +45,9 @@ export default {
             const retVal = this.pages[this.Page];
             if (!retVal) this.GetViewData();
             return retVal;
-        },
-        ...generateMagicProperties(['pluckTotalItems', "pageNoParam", "pageSizeParam", "httpMethod", "pageSize"])
+        }
     },
+        generateMagicProperties(['pluckTotalItems', "pageNoParam", "pageSizeParam", "httpMethod", "pageSize"])),
     watch: {
         Page(newPage, oldPage) {
             this.GetViewData();

@@ -16,9 +16,7 @@ const scrollableMixin = {
             }
         };
     },
-    computed: {
-        ...generateNonEvaluatedMagicProperties(['onScrolledToBottom'])
-    },
+    computed: generateNonEvaluatedMagicProperties(['onScrolledToBottom']),
 
 
 }
