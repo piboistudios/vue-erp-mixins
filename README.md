@@ -88,3 +88,4 @@ is the same as
         - ...ViewData computed properties
         - ...Paginated computed properties
         - ViewPage - The current page being viewed
+![preview](https://i.ibb.co/QknK6bX/image.png)
