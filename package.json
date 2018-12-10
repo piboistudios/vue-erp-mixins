@@ -1,0 +1,43 @@
+{
+  "name": "vue-erp-mixins",
+  "version": "1.0.0",
+  "description": "A collection of Vue Mixins useful for development of ERPs and other highly data-dependent websites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "vue-erp-mixins"
+  },
+  "keywords": [
+    "vue",
+    "erp",
+    "mixins",
+    "enterprise",
+    "resource",
+    "planning"
+  ],
+  "author": "Gabriel A Hayes",
+  "license": "ISC",
+  "dependencies": {
+    "@icon/font-awesome": "^4.7.0-2",
+    "axios": "^0.18.0",
+    "babel-loader": "^8.0.4",
+    "buefy": "^0.7.1",
+    "css-loader": "^2.0.0",
+    "icon-font-loader": "^1.5.7",
+    "karma-mocha": "^1.3.0",
+    "phantomjs-prebuilt": "^2.1.16",
+    "phantomjs-shim": "^0.1.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "vue": "^2.5.19",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2"
+  },
+  "devDependencies": {
+    "karma-webpack": "^3.0.5",
+    "webpack-cli": "^3.1.2"
+  }
+}

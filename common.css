@@ -1,0 +1,17 @@
+pre {
+    max-width: 80vw !important;
+    max-height: 25vh !important;
+    overflow-y: scroll !important;
+    white-space: pre-wrap !important;
+}
+
+.pre {
+    max-width: 80vw !important;
+    max-height: 25vh !important;
+    overflow-y: scroll !important;
+    white-space: pre-wrap !important;
+}
+
+.fit-content {
+    max-width: fit-content;
+}
