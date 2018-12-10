@@ -25,9 +25,9 @@ is the same as
 ```
 
 # Mixins:
-- View Data - essentially a component wrapper for the [axios](https://www.npmjs.com/package/axios) HTTP library.
-  - Description: Bootstraps a component up with the ability to consume and display data from Web API endpoints.
-  - Props
+- **View Data** - essentially a component wrapper for the [axios](https://www.npmjs.com/package/axios) HTTP library.
+  - _Description_: Bootstraps a component up with the ability to consume and display data from Web API endpoints.
+  - _Props_
     - api-url - the API URL endpoint to consume
     - http-method - the HTTP Method to use
     - base-url - the base URL (this can be left blank if the api-url is a relative path or includes the full url)
@@ -44,7 +44,7 @@ is the same as
     - onSuccess - data => void
     - getDataWhen - () => void
     - cancelWhen - an object with keys matching this Vue instance, the value of each is either an object containing cancel configuration options ({evaluation : Function, lazy : Boolean}) or function accepting the new and old values of a given property on this Vue instance and returning a boolean; if it returns true, it will cancel the current AJAX call, if there is one.
-  - Methods
+  - _Methods_
     - `Recover(cfg = {keepData: true, retry: false, ignoreDebounce: true})` - Recovers from an error, allowing subsequent fetches. By default this overrides debounced recovery. Set ignoreDebounce to false to prevent this behavior.
     - `AddViewData(data)` - Adds an object to the ViewData if ViewData is an array.
     - `RemoveViewData(query, count=1)` - Removes _count_ number of objects that have values matching the query object. e.g.:
@@ -53,38 +53,38 @@ is the same as
     ```
     Would remove 10 records named 'bob' from the scene.
     - `GetViewData(cfg={force: false})` - Gets ViewData. If the force option is set to true, this will override the `getDataWhen`/`GetDataWhen` instance members. 
-  - Events
+  - _Events_
     - begin-fetch
     - fetch-success
     - fetch-failure
-  - Computed Properties 
+  - _Computed Properties_ 
     - ViewData - By default, this is a lazy-loaded reference to the data pointed to by the api-url.
-- Paginated (supports v-model) - 
-    - Description: Bootstraps a component with the ability to handle pagination safely.
-    - Props
+- **Paginated (supports v-model)** - 
+    - _Description_: Bootstraps a component with the ability to handle pagination safely.
+    - _Props_
         - value - For v-model support
         - pageSize
         - items - The total number of 'items' that will exist in this component
         - looped - Whether or not to loop when traversing pages.
-    - Methods
+    - _Methods_
         - `ChangePage(val)`
         - `NextPage`
         - `PreviousPage`
-    - Events
+    - _Events_
         - input - for v-model support
         - page-changed - Happens just before input, emits `{oldValue, newValue}`
-    - Computed Properties
+    - _Computed Properties_
         - Page - The current page
         - Pages - The total number of pages
-- Paginated View Data Mixin (supports v-model for page number) -
-    - Description: A paginated view data mixin. Caches pages; use GetViewData({force: true}) to reload a page.
-    - Props
+- **Paginated View Data Mixin (supports v-model for page number)** -
+    - _Description_: A paginated view data mixin. Caches pages; use GetViewData({force: true}) to reload a page.
+    - _Props_
         - ...ViewData props
         - ...Paginated props
         - pluck-total-items - This function plucks the total items off of a response payload, assuming one is provided. Leave this undefined if total-items is not provided by the API endpoint.
         - page-no-param - This is the data member name (URL param or data payload) of the page number for outgoing requests. By default it is "pageNo""
         - page-size-param - This is the data member name of the page size for outgoing requests. By default it is "pageSize"
-    - Computed Properties
+    - _Computed Properties_
         - ...ViewData computed properties
         - ...Paginated computed properties
         - ViewPage - The current page being viewed
