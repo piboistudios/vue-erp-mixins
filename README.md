@@ -4,6 +4,7 @@ This is a collection of general purpose mixins specifically for data manipulatio
 # Mixin Usage:
 Each mixin allows props to be overriden using computed properties, data members or methods that have the same name as a given prop but with the first letter capitalized.
 e.g.
+_(In the component definition)_
 ```
 <script>
 export default {
@@ -16,6 +17,7 @@ export default {
 </script>
 ```
 is the same as 
+_(In a parent-component referencing the component with the mixin)_
 ```
 <template>
 <my-component-with-view-data-mixin 
@@ -24,6 +26,7 @@ is the same as
 </template>
 ```
 is the same as 
+_(In the component definition)_
 ```
 <script>
 export default {
