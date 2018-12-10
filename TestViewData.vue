@@ -46,7 +46,6 @@
                                     )
                             
                             b-field(label="Pages:") {{ Page }} / {{ Pages }}
-                            button.button(@click="canceled = true") Cancel 
                             button.button(@click="PreviousPage") Previous Page
                             button.button(@click="NextPage") Next Page
                             
