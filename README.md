@@ -7,7 +7,9 @@ e.g.
 _(In the component definition)_
 ```
 <script>
+import ViewData from 'vue-erp-mixins/view-data-mixin';
 export default {
+    mixins: [ViewData],
     computed: {
         ApiUrl() {
             return new Date().getDay() === 6 ? '/api/only-on-saturdays' : '/api/business-as-usual';
@@ -29,7 +31,9 @@ is the same as
 _(In the component definition)_
 ```
 <script>
+import ViewData from 'vue-erp-mixins/view-data-mixin';
 export default {
+    mixins: [ViewData],
     data() {
         return {
             ApiUrl: new Date().getDay() === 6 ? '/api/only-on-saturdays' : '/api/business-as-usual'
