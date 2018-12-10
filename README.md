@@ -44,6 +44,18 @@ is the same as
     - onSuccess - `data => void` - a callback for successful fetches.
     - getDataWhen - `() => true` or `true/false` - fetches are only allowed when this evaluates to or is equal to true; by default fetching is always allowed.
     - cancelWhen - an object with keys matching this Vue instance, the value of each is either an object containing cancel configuration options ({evaluation : Function, lazy : Boolean}) or function accepting the new and old values of a given property on this Vue instance and returning a boolean; if it returns true, it will cancel the current AJAX call, if there is one.
+        Example:
+        ```
+        <button @click="cancelButtonPressed = true">Cancel AJAX</button>
+        <my-component-with-view-data-mixin
+            :cancel-when="{
+                cancelButtonPressed: val => {
+                    if(val) cancelButtonPressed = false;
+                    return val;
+                }
+            }"
+        />
+        ```
   - _Methods_
     - `Recover(cfg = {keepData: true, retry: false, ignoreDebounce: true})` - Recovers from an error, allowing subsequent fetches. By default this overrides debounced recovery. Set ignoreDebounce to false to prevent this behavior.
     - `AddViewData(data)` - Adds an object to the ViewData if ViewData is an array.
