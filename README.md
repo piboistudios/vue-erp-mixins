@@ -23,6 +23,17 @@ is the same as
 />
 </template>
 ```
+is the same as 
+```
+<script>
+export default {
+    data() {
+        return {
+            ApiUrl: new Date().getDay() === 6 ? '/api/only-on-saturdays' : '/api/business-as-usual'
+        }
+    }
+}
+```
 
 # Mixins:
 - **View Data** - essentially a component wrapper for the [axios](https://www.npmjs.com/package/axios) HTTP library.
