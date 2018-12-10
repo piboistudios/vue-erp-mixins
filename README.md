@@ -56,6 +56,18 @@ is the same as
             }"
         />
         ```
+        or
+        ```
+        <button @click="$router.push('/home-page')">Back to Home</button>
+        <my-component-with-view-data-mixin
+            :cancel-when="{
+                '$route': {
+                    evaluation: route => route.path==="/home-page",
+                    deep: true,
+                }
+            }"
+        />
+        ```
   - _Methods_
     - `Recover(cfg = {keepData: true, retry: false, ignoreDebounce: true})` - Recovers from an error, allowing subsequent fetches. By default this overrides debounced recovery. Set ignoreDebounce to false to prevent this behavior.
     - `AddViewData(data)` - Adds an object to the ViewData if ViewData is an array.
