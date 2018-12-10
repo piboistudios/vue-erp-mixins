@@ -91,10 +91,10 @@ export default {
     - `Recover(cfg = {keepData: true, retry: false, ignoreDebounce: true})` - Recovers from an error, allowing subsequent fetches. By default this overrides debounced recovery. Set ignoreDebounce to false to prevent this behavior.
     - `AddViewData(data)` - Adds an object to the ViewData if ViewData is an array.
     - `RemoveViewData(query, count=1)` - Removes _count_ number of objects that have values matching the query object. e.g.:
-    ```
-    RemoveViewData({name: 'bob'}, 10)
-    ```
-    Would remove 10 records named 'bob' from the scene.
+        ```
+        RemoveViewData({name: 'bob'}, 10)
+        ```
+        Would remove 10 records named 'bob' from the scene.
     - `GetViewData(cfg={force: false})` - Gets ViewData. If the force option is set to true, this will override the `getDataWhen`/`GetDataWhen` instance members. 
   - _Events_
     - begin-fetch
