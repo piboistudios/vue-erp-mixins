@@ -21,7 +21,7 @@ const data = () => ({
 const viewDataMixin = {
     props: {
         apiUrl: String | Function,
-        method: {
+        httpMethod: {
             type: String | Function,
             default: 'get',
         },
@@ -68,7 +68,7 @@ const viewDataMixin = {
             'debounceTime',
             'lazy',
             'apiUrl',
-            'method',
+            'httpMethod',
             'headers',
             'onError',
             'onSuccess',
@@ -93,7 +93,7 @@ const viewDataMixin = {
     mounted() {
         this._$_init();
     },
-    methods: {
+    method: {
         _$_init() {
             if (this._cancelWhen !== null) {
                 const { _cancelWhen } = this;
@@ -121,10 +121,10 @@ const viewDataMixin = {
                 });
             }
         },
-        Recover(cfg = { keepData: true, retry: false }) {
-            const { keepData, retry } = cfg;
+        Recover(cfg = { keepData: true, retry: false, ignoreDebounce: true }) {
+            const { keepData, retry, ignoreDebounce } = cfg;
             const { _debounceTime } = this;
-            if (_debounceTime < 0) this.internal.busy = false;
+            if (!ignoreDebounce && _debounceTime < 0) this.internal.busy = false;
             !keepData && (this.view.data = null);
             retry && this.GetViewData();
             return;
@@ -156,7 +156,7 @@ const viewDataMixin = {
             const { force } = cfg;
             const {
                 _apiUrl,
-                _method,
+                _httpMethod,
                 _baseURL,
                 _transformRequest,
                 _debounceTime,
@@ -171,7 +171,7 @@ const viewDataMixin = {
                 _getDataWhen
             } = this;
             if (this.internal.busy || (!force && !_getDataWhen())) return;
-
+            this.cancelClient && this.cancelClient.cancel();
             const cancelClient = axios.CancelToken.source();
             this.cancelClient = cancelClient;
 
@@ -182,7 +182,7 @@ const viewDataMixin = {
             this.$emit('begin-fetch');
             axios.request({
                 url: _apiUrl,
-                method: _method,
+                method: _httpMethod,
                 baseURL: _baseURL,
                 transformRequest: _transformRequest,
                 transformResponse: _transformResponse,
@@ -204,10 +204,12 @@ const viewDataMixin = {
                     }
                     this.$emit('fetch-success');
                     _onSuccess(data);
+                    this.cancelClient = null;
 
                 }).catch(err => {
                     this.$emit('fetch-failure');
                     _onError(err);
+                    this.cancelClient = null;
                 });
 
         }

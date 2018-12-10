@@ -80,10 +80,10 @@ export default {
     Items() {
       return this.records;
     },
-    PageNoProp() {
+    PageNoParam() {
       return "page";
     },
-    PageSizeProp() {
+    PageSizeParam() {
       return "results";
     },
     DebounceTime() {

@@ -5,23 +5,31 @@ export default {
     mixins: [paginated, viewData],
     props: {
         pluckTotalItems: Function,
-        pageNoProp: {
+        pageNoParam: {
             type: String | Function,
             default: "pageNo",
         },
-        pageSizeProp: {
+        pageSizeParam: {
             type: String | Function,
             default: "pageSize",
         },
     },
     computed: {
         Params() {
+            const { _httpMethod } = this;
+            if (_httpMethod.toLowerCase() !== "get") return {};
+            return this.dataPayload;
+        },
+        Payload() {
+            const { _httpMethod } = this;
+            if (_httpMethod.toLowerCase() === "get") return {};
+            return this.dataPayload;
+        },
+        dataPayload() {
+            const { _pageNoParam, _pageSizeParam, _pageSize } = this;
             const retVal = {};
-            const pageNoProp = consumePropOrOther(this, "pageNoProp");
-            const pageSizeProp = consumePropOrOther(this, "pageSizeProp");
-            retVal[pageNoProp] = this.internalValue;
-            retVal[pageSizeProp] = consumePropOrOther(this, "pageSize");
-            return retVal;
+            retVal[_pageNoParam] = this.internalValue;
+            retVal[_pageSizeParam] = _pageSize;
         },
         GetDataWhen() {
             return () => this.pages[this.Page] === undefined
@@ -37,7 +45,7 @@ export default {
             if (!retVal) this.GetViewData();
             return retVal;
         },
-        ...generateMagicProperties(['pluckTotalItems'])
+        ...generateMagicProperties(['pluckTotalItems', "pageNoParam", "pageSizeParam", "httpMethod", "pageSize"])
     },
     watch: {
         Page(newPage, oldPage) {
