@@ -36,7 +36,6 @@ export default {
     methods: {
         ChangePage(val) {
             if (!this.Pages) return;
-            console.log({ val });
             this.internalValue = val;
             this.$emit('input', val);
         },

@@ -91,9 +91,9 @@ const viewDataMixin = {
     },
     data,
     mounted() {
-        this._$_init();
+        this._$_init && this._$_init();
     },
-    method: {
+    methods: {
         _$_init() {
             if (this._cancelWhen !== null) {
                 const { _cancelWhen } = this;
@@ -115,7 +115,10 @@ const viewDataMixin = {
                         :
                         cancelWhenEntry.value
                     if (this[key]) {
-                        const cancelIfEvaluationIsTrue = (newVal, oldVal) => evaluation(newVal, oldVal) && this.internal.busy && this.cancelClient.cancel(`reason: ${oldVal} -> ${newVal}`);
+                        const cancelIfEvaluationIsTrue = (newVal, oldVal) => evaluation(newVal, oldVal) &&
+                            this.internal.busy &&
+                            this.cancelClient &&
+                            this.cancelClient.cancel(`reason: ${oldVal} -> ${newVal}`);
                         this.$watch(key, cancelIfEvaluationIsTrue, deep ? { deep } : {});
                     }
                 });
@@ -152,7 +155,6 @@ const viewDataMixin = {
             };
         },
         GetViewData(cfg = { force: false }) {
-            console.log({ cfg });
             const { force } = cfg;
             const {
                 _apiUrl,

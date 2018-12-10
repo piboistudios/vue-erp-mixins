@@ -30,9 +30,10 @@ export default {
             const retVal = {};
             retVal[_pageNoParam] = this.internalValue;
             retVal[_pageSizeParam] = _pageSize;
+            return retVal;
         },
         GetDataWhen() {
-            return () => this.pages[this.Page] === undefined
+            return this.pages[this.Page] === undefined
         },
         OnSuccess() {
             return data => {
