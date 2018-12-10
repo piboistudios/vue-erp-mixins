@@ -97,9 +97,9 @@ export default {
         Would remove 10 records named 'bob' from the scene.
     - `GetViewData(cfg={force: false})` - Gets ViewData. If the force option is set to true, this will override the `getDataWhen`/`GetDataWhen` instance members. 
   - _Events_
-    - begin-fetch
-    - fetch-success
-    - fetch-failure
+    - **begin-fetch**
+    - **fetch-success**
+    - **fetch-failure**
   - _Computed Properties_ 
     - ViewData - By default, this is a lazy-loaded reference to the data pointed to by the api-url.
 - **Paginated (supports v-model)** - 
@@ -114,8 +114,8 @@ export default {
         - `NextPage`
         - `PreviousPage`
     - _Events_
-        - input - for v-model support
-        - page-changed - Happens just before input, emits `{oldValue, newValue}`
+        - **input** - for v-model support
+        - **page-changed** - Happens just before input, emits `{oldValue, newValue}`
     - _Computed Properties_
         - Page - The current page
         - Pages - The total number of pages
