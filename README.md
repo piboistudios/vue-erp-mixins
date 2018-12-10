@@ -95,7 +95,7 @@ export default {
         RemoveViewData({name: 'bob'}, 10)
         ```
         Would remove 10 records named 'bob' from the scene.
-    - `GetViewData(cfg={force: false})` - Gets ViewData. If the force option is set to true, this will override the `getDataWhen`/`GetDataWhen` instance members. 
+    - `GetViewData(cfg={force: false})` - Gets ViewData from the specified API URL endpoint. If the force option is set to true, this will override the `getDataWhen`/`GetDataWhen` instance members. 
   - _Events_
     - **begin-fetch**
     - **fetch-success**
