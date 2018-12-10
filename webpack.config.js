@@ -1,6 +1,7 @@
 // webpack.config.js
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const IconFontPlugin = require('icon-font-loader').Plugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -9,7 +10,8 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: __dirname + '/dist'
+        path: __dirname + '/dist',
+        publicPath: __dirname + "/public",
     },
     module: {
         rules: [
@@ -42,6 +44,10 @@ module.exports = {
     plugins: [
         // make sure to include the plugin for the magic
         new VueLoaderPlugin(),
-        new IconFontPlugin()
+        new IconFontPlugin(),
+        new CopyWebpackPlugin([
+            { from: 'public' }
+        ])
+ 
     ]
 }

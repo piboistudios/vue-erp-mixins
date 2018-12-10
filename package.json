@@ -21,10 +21,12 @@
   "author": "Gabriel A Hayes",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@icon/font-awesome": "^4.7.0-2",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.4",
     "buefy": "^0.7.1",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.0.0",
     "icon-font-loader": "^1.5.7",
     "karma-mocha": "^1.3.0",
@@ -34,10 +36,14 @@
     "pug-plain-loader": "^1.0.0",
     "vue": "^2.5.19",
     "vue-loader": "^15.4.2",
-    "vue-style-loader": "^4.1.2"
+    "vue-style-loader": "^4.1.2",
+    "webpack": "^4.27.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "install": "^0.12.2",
     "karma-webpack": "^3.0.5",
+    "npm": "^6.4.1",
     "webpack-cli": "^3.1.2"
   }
 }
