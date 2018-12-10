@@ -63,7 +63,7 @@ export default {
       results: 10,
       records: 1000,
       canceled: false,
-      debounce: 5000
+      debounce: 500
     };
   },
   computed: {
