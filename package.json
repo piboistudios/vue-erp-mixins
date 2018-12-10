@@ -4,7 +4,7 @@
   "description": "A collection of Vue Mixins useful for development of ERPs and other highly data-dependent websites.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
