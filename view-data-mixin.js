@@ -26,6 +26,10 @@ const viewDataMixin = {
             type: String | Function,
             default: 'get',
         },
+        defaultValue: {
+            type: Object | Array,
+            default: () => []
+        },
         baseURL: Function,
         transformRequest: defaultTransformation(),
         transformResponse: {
@@ -66,39 +70,54 @@ const viewDataMixin = {
         },
         cancelWhen: defaultNothing()
     },
-    computed: Object.assign({
-        ViewData() {
-            const retVal = this.view.data;
-            if (!retVal && this._lazy) this.GetViewData();
-            return retVal || []
+    computed:
+        Object.assign({
+            ViewData() {
+                const retVal = this.view.data;
+                if (!retVal && this._lazy) this.GetViewData();
+                return retVal || this._defaultValue;
+            },
+            Busy() {
+                return this.internal.busy;
+            },
+            HasViewData() {
+                const retVal = this.ViewData;
+                if (retVal !== null && retVal !== undefined) {
+                    if (retVal instanceof Array) {
+                        return retVal.length > 0;
+                    } else if (retVal instanceof Object) {
+                        return retVal && Object.keys(retVal).length > 0 || false;
+                    }
+                } else {
+                    return false;
+                }
+            },
         },
-        Busy() {
-            return this.internal.busy;
-        },
-    },
-        generateMagicProperties([
-            'debounceTime',
-            'lazy',
-            'apiUrl',
-            'httpMethod',
-            'headers',
-            'onError',
-            'onSuccess',
-            'params',
-            'baseURL',
-            'payload',
-            'auth',
-            'concatenate',
-            "cancelWhen",
-            'getDataWhen'
-        ]),
-        generateNonEvaluatedMagicProperties([
-            'transformRequest',
-            'transformResponse',
-            "onSuccess",
-            "onError",
+            generateMagicProperties([
+                'debounceTime',
+                'lazy',
+                'apiUrl',
+                'httpMethod',
+                'headers',
+                'onError',
+                'onSuccess',
+                'params',
+                'baseURL',
+                'payload',
+                'auth',
+                'concatenate',
+                "cancelWhen",
+                'getDataWhen',
+                "defaultValue",
+            ]),
+            generateNonEvaluatedMagicProperties([
+                'transformRequest',
+                'transformResponse',
+                "onSuccess",
+                "onError",
 
-        ])),
+            ])
+        ),
     data,
     mounted() {
         this._$_init && this._$_init();

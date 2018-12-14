@@ -102,6 +102,7 @@ export default {
     - **fetch-failure**
   - _Computed Properties_ 
     - ViewData - By default, this is a lazy-loaded reference to the data pointed to by the api-url.
+    - HasViewData - Boolean determining whether or not there is any ViewData (accounts for Array ViewData and Object ViewData).
 - **Paginated (supports v-model)** - 
     - _Description_: Bootstraps a component with the ability to handle pagination safely.
     - _Props_

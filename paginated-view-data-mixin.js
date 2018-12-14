@@ -14,40 +14,41 @@ export default {
             default: "pageSize",
         },
     },
-    computed: Object.assign({
-        Params() {
-            const { _httpMethod } = this;
-            if (_httpMethod.toLowerCase() !== "get") return {};
-            return this.dataPayload;
+    computed:
+        Object.assign({
+            Params() {
+                const { _httpMethod } = this;
+                if (_httpMethod.toLowerCase() !== "get") return {};
+                return this.dataPayload;
+            },
+            Payload() {
+                const { _httpMethod } = this;
+                if (_httpMethod.toLowerCase() === "get") return {};
+                return this.dataPayload;
+            },
+            dataPayload() {
+                const { _pageNoParam, _pageSizeParam, _pageSize } = this;
+                const retVal = {};
+                retVal[_pageNoParam] = this.internalValue;
+                retVal[_pageSizeParam] = _pageSize;
+                return retVal;
+            },
+            GetDataWhen() {
+                return this.pages[this.Page] === undefined
+            },
+            OnSuccess() {
+                return data => {
+                    this._pluckTotalItems && (this.items = this._pluckTotalItems(data))
+                    this.pages[this.Page] = data
+                };
+            },
+            ViewPage() {
+                const retVal = this.pages[this.Page];
+                if (!retVal) this.GetViewData();
+                return retVal;
+            }
         },
-        Payload() {
-            const { _httpMethod } = this;
-            if (_httpMethod.toLowerCase() === "get") return {};
-            return this.dataPayload;
-        },
-        dataPayload() {
-            const { _pageNoParam, _pageSizeParam, _pageSize } = this;
-            const retVal = {};
-            retVal[_pageNoParam] = this.internalValue;
-            retVal[_pageSizeParam] = _pageSize;
-            return retVal;
-        },
-        GetDataWhen() {
-            return this.pages[this.Page] === undefined
-        },
-        OnSuccess() {
-            return data => {
-                this._pluckTotalItems && (this.items = this._pluckTotalItems(data))
-                this.pages[this.Page] = data
-            };
-        },
-        ViewPage() {
-            const retVal = this.pages[this.Page];
-            if (!retVal) this.GetViewData();
-            return retVal;
-        }
-    },
-        generateMagicProperties(['pluckTotalItems', "pageNoParam", "pageSizeParam", "httpMethod", "pageSize"])),
+            generateMagicProperties(['pluckTotalItems', "pageNoParam", "pageSizeParam", "httpMethod", "pageSize"])),
     watch: {
         Page(newPage, oldPage) {
             this.GetViewData();

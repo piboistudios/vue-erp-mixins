@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "A collection of Vue Mixins useful for development of ERPs and other highly data-dependent websites.",
   "main": "index.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import",
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
   "scripts": {
     "build": "webpack"
   },

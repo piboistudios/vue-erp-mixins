@@ -24,14 +24,17 @@ export default {
             internalValue: 1,
         }
     },
-    computed: Object.assign({
-        Pages() {
-            return Number(this._items) / Math.max(Number(this._pageSize), 1);
+    computed:
+        Object.assign({
+            Pages() {
+                return Number(this._items) / Math.max(Number(this._pageSize), 1);
+            },
+            Page() {
+                return Number(this.internalValue);
+            }
         },
-        Page() {
-            return Number(this.internalValue);
-        }
-    }, generateMagicProperties(['looped', 'items', 'pageSize'])),
+            generateMagicProperties(['looped', 'items', 'pageSize'])
+        ),
     methods: {
         ChangePage(val) {
             if (!this.Pages) return;
